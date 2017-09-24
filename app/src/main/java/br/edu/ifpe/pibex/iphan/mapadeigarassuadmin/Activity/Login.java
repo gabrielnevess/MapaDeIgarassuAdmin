@@ -1,9 +1,9 @@
 package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,12 +39,10 @@ public class Login extends Activity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(email.getText().length() != 0 && password.getText().length() != 0){
-                    user = new User();
-                    user.setEmail(email.getText().toString());
-                    user.setPassword(password.getText().toString());
+                if (email.getText().length() != 0 && password.getText().length() != 0) {
+                    user = new User(email.getText().toString(), password.getText().toString());
                     validationLogin();
-                }else{
+                } else {
                     Toast.makeText(Login.this, "Preencha os campos e-mail e senha!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -54,23 +52,30 @@ public class Login extends Activity {
     }
 
     private void validationLogin() {
+
+        final ProgressDialog progressDialog = new ProgressDialog(Login.this);
+        progressDialog.setMessage("Autenticando...");
+        progressDialog.show();
+
         authentication = ConfigurationFirebase.getFirebaseAuth();
         authentication
                 .signInWithEmailAndPassword(user.getEmail(), user.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    openHome();
-                    Toast.makeText(Login.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(Login.this, "Usuário ou senha incorreto!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            progressDialog.cancel();
+                            openHome();
+                            Toast.makeText(Login.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            progressDialog.cancel();
+                            Toast.makeText(Login.this, "Usuário ou senha incorreto!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
-    public void openHome(){
+    private void openHome() {
         Intent intent = new Intent(Login.this, Home.class);
         startActivity(intent);
     }
