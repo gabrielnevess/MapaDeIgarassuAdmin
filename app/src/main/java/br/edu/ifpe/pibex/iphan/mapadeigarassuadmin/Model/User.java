@@ -1,8 +1,4 @@
-package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Class;
-
-/**
- * Created by gabri on 07/06/2017.
- */
+package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Model;
 
 public class User {
     private String email;

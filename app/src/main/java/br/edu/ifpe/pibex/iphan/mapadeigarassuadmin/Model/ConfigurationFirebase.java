@@ -1,12 +1,8 @@
-package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Firebase;
+package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Model;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-/**
- * Created by gabri on 07/06/2017.
- */
 
 public class ConfigurationFirebase {
 

@@ -2,22 +2,24 @@ package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Class.User;
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Firebase.ConfigurationFirebase;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Dialog.AlertDialogMessage;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Model.User;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Model.ConfigurationFirebase;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Util.SharedPreferencesUtil;
 
 public class Login extends Activity {
 
@@ -26,9 +28,18 @@ public class Login extends Activity {
     private Button signIn;
     private FirebaseAuth authentication;
     private User user;
+    private Context context;
+
+    public Login(){
+        this.context = this;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(SharedPreferencesUtil.isLogged(context)){
+            openHome();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -43,7 +54,7 @@ public class Login extends Activity {
                     user = new User(email.getText().toString(), password.getText().toString());
                     validationLogin();
                 } else {
-                    Toast.makeText(Login.this, "Preencha os campos e-mail e senha!", Toast.LENGTH_SHORT).show();
+                    AlertDialogMessage.alertDialogMessage(context, "Atenção!", "Preencha os campos e-mail e senha!");
                 }
             }
 
@@ -54,6 +65,7 @@ public class Login extends Activity {
     private void validationLogin() {
 
         final ProgressDialog progressDialog = new ProgressDialog(Login.this);
+        progressDialog.setTitle("Aguarde");
         progressDialog.setMessage("Autenticando...");
         progressDialog.show();
 
@@ -65,18 +77,18 @@ public class Login extends Activity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             progressDialog.cancel();
+                            SharedPreferencesUtil.isLogged(context, true);
                             openHome();
-                            Toast.makeText(Login.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
                         } else {
                             progressDialog.cancel();
-                            Toast.makeText(Login.this, "Usuário ou senha incorreto!", Toast.LENGTH_SHORT).show();
+                            AlertDialogMessage.alertDialogMessage(context, "Erro!", "Usuário ou senha incorreto!");
                         }
                     }
                 });
     }
 
     private void openHome() {
-        Intent intent = new Intent(Login.this, Home.class);
+        Intent intent = new Intent(Login.this, HomeActivity.class);
         startActivity(intent);
     }
 

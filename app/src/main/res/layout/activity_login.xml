@@ -26,8 +26,8 @@
             android:layout_column="0"
             android:layout_marginTop="15dp"
             android:layout_row="0"
-            android:text="Email: "
-            android:textAlignment="center"
+            android:text="Digite seu email"
+            android:textAlignment="textStart"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textStyle="bold" />
 
@@ -60,8 +60,8 @@
             android:layout_above="@+id/password"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:text="Senha: "
-            android:textAlignment="center"
+            android:text="Digite sua senha"
+            android:textAlignment="textStart"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textStyle="bold" />
 
