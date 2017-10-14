@@ -36,6 +36,9 @@ public class Login extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /**
+         * Verificação se o usuário está logado
+         */
         if(SharedPreferencesUtil.isLogged(context)){
             openHome();
         }
@@ -54,6 +57,7 @@ public class Login extends Activity {
                     user = new User(email.getText().toString(), password.getText().toString());
                     validationLogin();
                 } else {
+                    //Alert
                     AlertDialogMessage.alertDialogMessage(context, "Atenção!", "Preencha os campos e-mail e senha!");
                 }
             }
@@ -62,6 +66,7 @@ public class Login extends Activity {
 
     }
 
+    //Método de validação do usuário
     private void validationLogin() {
 
         final ProgressDialog progressDialog = new ProgressDialog(Login.this);
@@ -81,6 +86,7 @@ public class Login extends Activity {
                             openHome();
                         } else {
                             progressDialog.cancel();
+                            //Alert
                             AlertDialogMessage.alertDialogMessage(context, "Erro!", "Usuário ou senha incorreto!");
                         }
                     }
