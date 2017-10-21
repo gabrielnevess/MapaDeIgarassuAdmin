@@ -1,10 +1,10 @@
 package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model;
 
-public class User {
+public class UserModel {
     private String email;
     private String password;
 
-    public User(String email, String password) {
+    public UserModel(String email, String password) {
         this.email = email;
         this.password = password;
     }

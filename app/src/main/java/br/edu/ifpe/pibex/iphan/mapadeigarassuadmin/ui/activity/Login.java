@@ -16,8 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.dialog.AlertDialogMessage;
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.User;
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.ConfigurationFirebase;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.UserModel;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.ConnectionFireBaseModel;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.SharedPreferencesUtil;
 
@@ -27,7 +27,7 @@ public class Login extends Activity {
     private EditText password;
     private Button signIn;
     private FirebaseAuth authentication;
-    private User user;
+    private UserModel userModel;
     private Context context;
 
     public Login(){
@@ -54,7 +54,7 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                 if (email.getText().length() != 0 && password.getText().length() != 0) {
-                    user = new User(email.getText().toString(), password.getText().toString());
+                    userModel = new UserModel(email.getText().toString(), password.getText().toString());
                     validationLogin();
                 } else {
                     //Alert
@@ -74,9 +74,9 @@ public class Login extends Activity {
         progressDialog.setMessage("Autenticando...");
         progressDialog.show();
 
-        authentication = ConfigurationFirebase.getFirebaseAuth();
+        authentication = ConnectionFireBaseModel.getFirebaseAuth();
         authentication
-                .signInWithEmailAndPassword(user.getEmail(), user.getPassword())
+                .signInWithEmailAndPassword(userModel.getEmail(), userModel.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
