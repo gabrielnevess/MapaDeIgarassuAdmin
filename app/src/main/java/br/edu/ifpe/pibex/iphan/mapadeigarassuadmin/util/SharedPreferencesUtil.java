@@ -34,4 +34,24 @@ public class SharedPreferencesUtil {
         return sharedPreferences(context).getBoolean("isLogged", false);
     }
 
+    /**
+     * Método para setar o tipo do mapa
+     * @param context
+     * @param type
+     */
+    public static void setTypeMaps(Context context, int type){
+        editor = sharedPreferences(context).edit();
+        editor.putInt("typeMaps", type);
+        editor.commit();
+    }
+
+    /**
+     * Método para pegar o tipo do mapa
+     * @param context
+     * @return
+     */
+    public static int getTypeMaps(Context context){
+        return sharedPreferences(context).getInt("typeMaps", 0);
+    }
+
 }
