@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Activity.HomeActivity">
+    tools:context="br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.activity.HomeActivity">
 
     <include layout="@layout/content_home" />
 

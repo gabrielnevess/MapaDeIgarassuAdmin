@@ -1,4 +1,4 @@
-package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Activity;
+package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -15,11 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Dialog.AlertDialogMessage;
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Model.User;
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Model.ConfigurationFirebase;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.dialog.AlertDialogMessage;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.User;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.ConfigurationFirebase;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Util.SharedPreferencesUtil;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.SharedPreferencesUtil;
 
 public class Login extends Activity {
 

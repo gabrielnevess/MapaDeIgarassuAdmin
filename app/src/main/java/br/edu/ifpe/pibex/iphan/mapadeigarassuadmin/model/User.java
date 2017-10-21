@@ -1,4 +1,4 @@
-package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Model;
+package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model;
 
 public class User {
     private String email;

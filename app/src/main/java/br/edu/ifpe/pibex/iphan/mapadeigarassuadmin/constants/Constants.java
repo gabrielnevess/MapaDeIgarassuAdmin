@@ -1,4 +1,4 @@
-package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Constants;
+package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants;
 
 public class Constants {
 

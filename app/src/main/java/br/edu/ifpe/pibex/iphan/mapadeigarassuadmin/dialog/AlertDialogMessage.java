@@ -1,4 +1,4 @@
-package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Dialog;
+package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;

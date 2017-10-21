@@ -1,10 +1,10 @@
-package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Util;
+package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util;
 
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.Constants.Constants;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants.Constants;
 
 public class SharedPreferencesUtil {
 
