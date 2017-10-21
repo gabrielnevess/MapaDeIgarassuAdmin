@@ -13,6 +13,7 @@ public class AlertDialogMessage {
 
     /**
      * Método de alert
+     *
      * @param context
      * @param title
      * @param message
@@ -35,6 +36,7 @@ public class AlertDialogMessage {
 
     /**
      * Método para exibir um janela de progresso(Dialog)
+     *
      * @param context
      * @param title
      * @param message
@@ -50,7 +52,5 @@ public class AlertDialogMessage {
     public static void progressDialogDismiss() {
         progressDialog.cancel();
     }
-
-
 
 }

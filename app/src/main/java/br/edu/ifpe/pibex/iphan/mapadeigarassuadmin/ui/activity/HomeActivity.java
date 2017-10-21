@@ -16,6 +16,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Marker;
 
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants.Constants;
@@ -30,7 +31,7 @@ import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.SharedPreferencesUtil;
 import static br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R.id.map;
 
 public class HomeActivity extends AppCompatActivity
-        implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+        implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private InvokeAddMarkerMapOther invokeAddMarkerMapOther;
     private View markerView;
@@ -89,6 +90,14 @@ public class HomeActivity extends AppCompatActivity
 
         infoWindow();
 
+         /*Listener de cada marker*/
+        GoogleMapsModel.getMap().setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+            }
+        });
+
     }
 
     /*Método infoWindow, colocar pop-up para todos os marker*/
@@ -131,7 +140,8 @@ public class HomeActivity extends AppCompatActivity
                         Intent intent = new Intent(HomeActivity.this, Login.class);
                         startActivity(intent);
 
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                    }
                 }
             }).start();
 
@@ -144,4 +154,8 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
 }
