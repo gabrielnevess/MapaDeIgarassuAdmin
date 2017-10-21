@@ -22,6 +22,7 @@ import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants.Constants;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.GoogleMapsModel;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.adapter.GoogleInfoWindowAdapter;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.fragments.DialogTypeMapsFragment;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.other.InvokeAddMarkerMapOther;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.SharedPreferencesUtil;
 
 import static br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R.id.map;
@@ -29,7 +30,7 @@ import static br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R.id.map;
 public class HomeActivity extends AppCompatActivity
         implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
-
+    private InvokeAddMarkerMapOther invokeAddMarkerMapOther;
     private View markerView;
     private final Context context;
 
@@ -61,6 +62,9 @@ public class HomeActivity extends AppCompatActivity
 
         /*Inflate para o pop-up dos markers(Janela em cima do marker)*/
         this.markerView = getLayoutInflater().inflate(R.layout.marker_view, null);
+
+        invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(this.context);
+
     }
 
 
@@ -77,7 +81,7 @@ public class HomeActivity extends AppCompatActivity
         }
 
         GoogleMapsModel.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(Constants.CENTER_LOCATION, 16)); /*Centro do mapa*/
-
+        invokeAddMarkerMapOther.onAddMarkerFirebase();
         /*Botões de Zoom*/
         GoogleMapsModel.getMap().getUiSettings().setZoomControlsEnabled(true);
 
