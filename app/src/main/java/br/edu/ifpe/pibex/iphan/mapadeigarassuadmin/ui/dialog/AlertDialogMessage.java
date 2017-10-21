@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 public class AlertDialogMessage {
 
     private static AlertDialog alertDialog;
+    private static AlertDialog.Builder builder;
 
     /**
      * Método de alert
@@ -15,7 +16,7 @@ public class AlertDialogMessage {
      * @param message
      */
     public static void alertDialogMessage(Context context, String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
