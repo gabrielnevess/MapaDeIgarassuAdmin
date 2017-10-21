@@ -21,6 +21,7 @@ import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants.Constants;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.GoogleMapsModel;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.adapter.GoogleInfoWindowAdapter;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.fragments.DialogTypeMapsFragment;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.SharedPreferencesUtil;
 
 import static br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R.id.map;
@@ -104,6 +105,8 @@ public class HomeActivity extends AppCompatActivity
             SharedPreferencesUtil.isLogged(this, false);
             Intent intent = new Intent(HomeActivity.this, Login.class);
             startActivity(intent);
+        }else if (id == R.id.nav_type_maps) { /*Alert Dialog para escolher o tipo do mapa*/
+            DialogTypeMapsFragment.alertDialog(this);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
