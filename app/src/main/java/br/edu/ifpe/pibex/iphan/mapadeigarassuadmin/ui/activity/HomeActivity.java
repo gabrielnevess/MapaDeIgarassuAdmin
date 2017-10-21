@@ -1,5 +1,6 @@
 package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,12 +20,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants.Constants;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.GoogleMapsModel;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.adapter.GoogleInfoWindowAdapter;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.SharedPreferencesUtil;
 
 import static br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R.id.map;
 
 public class HomeActivity extends AppCompatActivity
         implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+
+
+    private View markerView;
+    private final Context context;
+
+    public HomeActivity() { this.context = this; }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +55,9 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        /*Inflate para o pop-up dos markers(Janela em cima do marker)*/
+        this.markerView = getLayoutInflater().inflate(R.layout.marker_view, null);
     }
 
 
@@ -59,6 +71,14 @@ public class HomeActivity extends AppCompatActivity
         GoogleMapsModel.getMap().getUiSettings().setZoomControlsEnabled(true);
 
 
+    }
+
+    /*Método infoWindow, colocar pop-up para todos os marker*/
+    private void infoWindow() {
+
+        if (GoogleMapsModel.getMap() != null) {
+            GoogleMapsModel.getMap().setInfoWindowAdapter(new GoogleInfoWindowAdapter(markerView));
+        }
     }
 
     @Override
