@@ -68,6 +68,14 @@ public class HomeActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
 
         GoogleMapsModel.setMap(googleMap);
+
+         /*Verificação de tipos de mapa*/
+        if (Constants.MAP_TYPE_HYBRID == SharedPreferencesUtil.getTypeMaps(this)) {
+            GoogleMapsModel.getMap().setMapType(Constants.MAP_TYPE_HYBRID);
+        } else {
+            GoogleMapsModel.getMap().setMapType(Constants.MAP_TYPE_NORMAL);
+        }
+
         GoogleMapsModel.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(Constants.CENTER_LOCATION, 16)); /*Centro do mapa*/
 
         /*Botões de Zoom*/
