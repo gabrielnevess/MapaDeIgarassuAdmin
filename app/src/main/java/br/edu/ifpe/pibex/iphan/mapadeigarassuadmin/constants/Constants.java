@@ -16,4 +16,5 @@ public class Constants {
 
     //constante center location para o mapa
     public static final LatLng CENTER_LOCATION = new LatLng(-7.834195, -34.906142);
+
 }

@@ -80,11 +80,12 @@ public class HomeActivity extends AppCompatActivity
             GoogleMapsModel.getMap().setMapType(Constants.MAP_TYPE_NORMAL);
         }
 
+        invokeAddMarkerMapOther.onAddMarkerFirebase(); //adicionando os marcados diretamente do firebase
         GoogleMapsModel.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(Constants.CENTER_LOCATION, 16)); /*Centro do mapa*/
-        invokeAddMarkerMapOther.onAddMarkerFirebase();
         /*Botões de Zoom*/
         GoogleMapsModel.getMap().getUiSettings().setZoomControlsEnabled(true);
 
+        infoWindow();
 
     }
 
