@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.GoogleMapsModel;
 
-public class Marker {
+public class MarkerOther {
     public static void marker(String title, Double latitude, Double longitude){
         GoogleMapsModel.getMap().addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
