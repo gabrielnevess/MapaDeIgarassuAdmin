@@ -32,7 +32,9 @@ public class HomeActivity extends AppCompatActivity
     private View markerView;
     private final Context context;
 
-    public HomeActivity() { this.context = this; }
+    public HomeActivity() {
+        this.context = this;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,9 @@ public class HomeActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
         }
     }
 
