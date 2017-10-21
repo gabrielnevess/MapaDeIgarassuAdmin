@@ -1,4 +1,4 @@
-package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.activity;
+package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

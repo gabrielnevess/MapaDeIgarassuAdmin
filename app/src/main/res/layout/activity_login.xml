@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context="br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.activity.Login"
+    tools:context="br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.activity.Login"
     android:orientation="vertical"
     android:weightSum="1">
 

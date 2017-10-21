@@ -1,4 +1,4 @@
-package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.dialog;
+package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -29,4 +29,7 @@ public class AlertDialogMessage {
         alertDialog.show();
 
     }
+
+
+
 }

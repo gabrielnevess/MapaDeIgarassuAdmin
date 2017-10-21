@@ -1,4 +1,4 @@
-package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.activity;
+package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.dialog.AlertDialogMessage;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.dialog.AlertDialogMessage;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.User;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.ConfigurationFirebase;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
