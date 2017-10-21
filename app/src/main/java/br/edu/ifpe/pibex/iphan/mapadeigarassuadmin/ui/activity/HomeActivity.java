@@ -19,8 +19,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants.Constants;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.ConnectionFireBaseModel;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.GoogleMapsModel;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.adapter.GoogleInfoWindowAdapter;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.dialog.AlertDialogMessage;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.fragments.DialogTypeMapsFragment;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.other.InvokeAddMarkerMapOther;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.SharedPreferencesUtil;
@@ -115,10 +117,25 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_logout) {
-            SharedPreferencesUtil.isLogged(this, false);
-            Intent intent = new Intent(HomeActivity.this, Login.class);
-            startActivity(intent);
-        }else if (id == R.id.nav_type_maps) { /*Alert Dialog para escolher o tipo do mapa*/
+
+            AlertDialogMessage.progressDialogStart(this, "Aguarde", "Saindo...");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+
+                        Thread.sleep(2000);
+                        ConnectionFireBaseModel.getFirebaseAuth().signOut();
+                        AlertDialogMessage.progressDialogDismiss();
+                        SharedPreferencesUtil.isLogged(context, false);
+                        Intent intent = new Intent(HomeActivity.this, Login.class);
+                        startActivity(intent);
+
+                    } catch (InterruptedException e) {}
+                }
+            }).start();
+
+        } else if (id == R.id.nav_type_maps) { /*Alert Dialog para escolher o tipo do mapa*/
             DialogTypeMapsFragment.alertDialog(this);
         }
 
