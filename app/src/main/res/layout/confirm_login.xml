@@ -11,7 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email: "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -24,7 +26,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Senha: "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/editTextPassoword"
