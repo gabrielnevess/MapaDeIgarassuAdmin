@@ -40,6 +40,5 @@ public class ValueEventListenerMarkerOther implements ValueEventListener{
     }
 
     @Override
-    public void onCancelled(DatabaseError error) {
-    }
+    public void onCancelled(DatabaseError error) {}
 }

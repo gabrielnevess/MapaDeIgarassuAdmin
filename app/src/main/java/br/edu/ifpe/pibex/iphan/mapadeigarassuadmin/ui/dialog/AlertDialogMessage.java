@@ -18,7 +18,6 @@ import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.other.InvokeAddMarkerMapOt
 public class AlertDialogMessage {
 
     private static AlertDialog alertDialog;
-    private static AlertDialog.Builder builder;
     private static ProgressDialog progressDialog;
 
     /**
@@ -29,7 +28,7 @@ public class AlertDialogMessage {
      * @param message
      */
     public static void alertDialogMessage(Context context, String title, String message) {
-        builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
@@ -68,8 +67,7 @@ public class AlertDialogMessage {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View popUpView = layoutInflater.inflate(R.layout.alert_edit_marker, null);
-
-        builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(popUpView);
 
         final EditText editTextName = (EditText) popUpView.findViewById(R.id.editTextName);
@@ -84,22 +82,8 @@ public class AlertDialogMessage {
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-
-                                Map<String, Object> location = new HashMap<String, Object>();
-                                location.put("name", String.valueOf(editTextName.getText()));
-                                location.put("address", String.valueOf(editTextAddress.getText()));
-                                location.put("description", String.valueOf(editTextDescription.getText()));
-                                location.put("latitude", latitude);
-                                location.put("longitude", longitude);
-
-                                //update no pontos
-                                ConnectionFireBaseModel.getReferenceFirebase()
-                                        .child("locations")
-                                        .child(String.valueOf(_id-1)).updateChildren(location);
-
-                                InvokeAddMarkerMapOther invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(context);
-                                invokeAddMarkerMapOther.onAddMarkerFirebase();
-
+                                loginConfirm(context, _id, String.valueOf(editTextName.getText()), String.valueOf(editTextAddress.getText()),
+                                        String.valueOf(editTextDescription.getText()), latitude, longitude);
                             }
                         })
                 .setNegativeButton("Cancelar",
@@ -110,6 +94,55 @@ public class AlertDialogMessage {
                         });
 
         AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
+
+
+    public static void loginConfirm(final Context context, final int _id, final String name, final String address,
+                                    final String description, final double latitude, final double longitude) {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View popUpViewConfirm = layoutInflater.inflate(R.layout.confirm_login, null);
+
+        final AlertDialog.Builder builderConfirm = new AlertDialog.Builder(context);
+        builderConfirm.setView(popUpViewConfirm);
+
+        final EditText editTextEmail = (EditText) popUpViewConfirm.findViewById(R.id.editTextEmail);
+        final EditText editTextPassword = (EditText) popUpViewConfirm.findViewById(R.id.editTextPassoword);
+
+        builderConfirm.setCancelable(false)
+                .setPositiveButton("Confirmar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                Map<String, Object> location = new HashMap<String, Object>();
+                                location.put("name", name);
+                                location.put("address", address);
+                                location.put("description", description);
+                                location.put("latitude", latitude);
+                                location.put("longitude", longitude);
+
+                                //update no pontos
+                                ConnectionFireBaseModel.getReferenceFirebase()
+                                        .child("locations")
+                                        .child(String.valueOf(_id - 1)).updateChildren(location);
+
+                                InvokeAddMarkerMapOther invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(context);
+                                invokeAddMarkerMapOther.onAddMarkerFirebase();
+
+                            }
+
+                        })
+
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = builderConfirm.create();
         alertDialog.show();
 
     }
