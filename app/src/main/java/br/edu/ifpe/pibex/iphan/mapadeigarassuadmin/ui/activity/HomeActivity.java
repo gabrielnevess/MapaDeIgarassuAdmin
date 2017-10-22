@@ -103,7 +103,8 @@ public class HomeActivity extends AppCompatActivity
                 LocationModel locationModel = dataBaseUtil.searchLocation(name);
 
                 if (name.equals(locationModel.getName())) {
-                    AlertDialogMessage.alertDialogMarker(context, locationModel.getId(),
+                    AlertDialogMessage alertDialogMessage = new AlertDialogMessage();
+                    alertDialogMessage.alertDialogMarker(context, locationModel.getId(),
                             locationModel.getName(), locationModel.getAddress(),
                             locationModel.getDescription(), locationModel.getLatitude(), locationModel.getLongitude());
                 }
@@ -155,7 +156,8 @@ public class HomeActivity extends AppCompatActivity
                         Intent intent = new Intent(HomeActivity.this, Login.class);
                         startActivity(intent);
 
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                    }
                 }
             }).start();
 

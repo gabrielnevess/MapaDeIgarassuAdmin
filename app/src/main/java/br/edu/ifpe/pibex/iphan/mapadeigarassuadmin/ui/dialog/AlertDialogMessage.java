@@ -26,7 +26,6 @@ public class AlertDialogMessage {
 
     /**
      * Método de alert
-     *
      * @param context
      * @param title
      * @param message
@@ -66,7 +65,7 @@ public class AlertDialogMessage {
         progressDialog.cancel();
     }
 
-    public static void alertDialogMarker(final Context context, final int _id, final String name, final String address,
+    public void alertDialogMarker(final Context context, final int _id, final String name, final String address,
                                          final String description, final double latitude, final double longitude) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -103,8 +102,8 @@ public class AlertDialogMessage {
     }
 
 
-    public static void loginConfirm(final Context context, final int _id, final String name, final String address,
-                                    final String description, final double latitude, final double longitude) {
+    private void loginConfirm(final Context context, final int _id, final String name, final String address,
+                                     final String description, final double latitude, final double longitude) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View popUpViewConfirm = layoutInflater.inflate(R.layout.confirm_login, null);
@@ -139,10 +138,10 @@ public class AlertDialogMessage {
                                     location.put("latitude", latitude);
                                     location.put("longitude", longitude);
 
-                                    //update no pontos
+                                    //update do ponto específico
                                     ConnectionFireBaseModel.getReferenceFirebase()
                                             .child("locations")
-                                            .child(String.valueOf(_id - 1)).updateChildren(location);
+                                            .child(String.valueOf( _id-1 )).updateChildren(location);
 
                                     AlertDialogMessage.progressDialogDismiss();
                                     InvokeAddMarkerMapOther invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(context);
