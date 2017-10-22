@@ -83,9 +83,9 @@ public class Login extends Activity {
 
                             AlertDialogMessage.progressDialogDismiss(); //fechando progressDialog
                             SharedPreferencesUtil.isLogged(context, true); //colocando true se o usuário for logado com sucesso
-                            SharedPreferencesUtil.email(context,
-                                    Hashing.sha1().hashString(userModel.getPassword(), Charsets.UTF_8 ).toString()); //armazenando password com sha1 localmente
                             SharedPreferencesUtil.email(context, userModel.getEmail()); //armazenando email localmente
+                            SharedPreferencesUtil.password(context,
+                                    Hashing.sha1().hashString(userModel.getPassword(), Charsets.UTF_8 ).toString()); //armazenando password com sha1 localmente
                             openHome(); //chamando activity home
 
                         } else {
