@@ -22,10 +22,12 @@ import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants.Constants;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.ConnectionFireBaseModel;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.GoogleMapsModel;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.LocationModel;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.adapter.GoogleInfoWindowAdapter;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.dialog.AlertDialogMessage;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.fragments.DialogTypeMapsFragment;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.other.InvokeAddMarkerMapOther;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.DataBaseUtil;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.SharedPreferencesUtil;
 
 import static br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R.id.map;
@@ -95,7 +97,16 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onInfoWindowClick(Marker marker) {
 
+                DataBaseUtil dataBaseUtil = new DataBaseUtil(context); /*Instância da base de dados local*/
+
+                String name = marker.getTitle();
+                LocationModel locationModel = dataBaseUtil.searchLocation(name);
+
+                if (name.equals(locationModel.getName())) {
+
+                }
             }
+
         });
 
     }

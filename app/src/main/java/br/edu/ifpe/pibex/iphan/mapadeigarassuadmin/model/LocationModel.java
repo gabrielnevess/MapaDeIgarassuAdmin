@@ -1,6 +1,6 @@
 package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model;
 
-public class LocationModel {
+public class LocationModel{
     private String name;
     private double longitude;
     private double latitude;

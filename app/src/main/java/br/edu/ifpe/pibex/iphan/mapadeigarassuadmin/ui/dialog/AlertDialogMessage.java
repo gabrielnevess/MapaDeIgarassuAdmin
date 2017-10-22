@@ -4,6 +4,11 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
 
 public class AlertDialogMessage {
 
@@ -53,4 +58,38 @@ public class AlertDialogMessage {
         progressDialog.cancel();
     }
 
+    public static void alertDialogMarker(Context context, String name, String address, String description) {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View popUpView = layoutInflater.inflate(R.layout.alert_edit_marker, null);
+
+        builder = new AlertDialog.Builder(context);
+        builder.setView(popUpView);
+
+        final EditText editTextName = (EditText) popUpView.findViewById(R.id.editTextName);
+        final EditText editTextAddress = (EditText) popUpView.findViewById(R.id.editTextAddress);
+        final EditText editTextDescription = (EditText) popUpView.findViewById(R.id.editTextDescription);
+
+        editTextName.setText(name);
+        editTextAddress.setText(address);
+        editTextDescription.setText(description);
+
+        builder.setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        })
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
 }
