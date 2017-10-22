@@ -78,9 +78,9 @@ public class AlertDialogMessage {
         final EditText editTextAddress = (EditText) popUpView.findViewById(R.id.editTextAddress);
         final EditText editTextDescription = (EditText) popUpView.findViewById(R.id.editTextDescription);
 
-        editTextName.setText(name);
-        editTextAddress.setText(address);
-        editTextDescription.setText(description);
+        editTextName.setText(name); //colocando nome do marcador na caixa de editText
+        editTextAddress.setText(address); //colocando endereço do marcador  na caixa de editText
+        editTextDescription.setText(description); //colocando descrição do marcador na caixa de editText
 
         builder.setCancelable(false)
                 .setPositiveButton("OK",
@@ -117,8 +117,8 @@ public class AlertDialogMessage {
         final EditText editTextEmail = (EditText) popUpViewConfirm.findViewById(R.id.editTextEmail);
         final EditText editTextPassword = (EditText) popUpViewConfirm.findViewById(R.id.editTextPassoword);
 
-        editTextEmail.setText(SharedPreferencesUtil.email(context));
-        editTextEmail.setEnabled(false);
+        editTextEmail.setText(SharedPreferencesUtil.email(context)); //colocando email na caixa de editText
+        editTextEmail.setEnabled(false); //deixando caixa de email inalteravél
 
         builderConfirm.setCancelable(false)
                 .setPositiveButton("Confirmar",
@@ -126,6 +126,8 @@ public class AlertDialogMessage {
                             public void onClick(DialogInterface dialog, int id) {
 
                                 AlertDialogMessage.progressDialogStart(context, "Aguarde", "Autenticando...");
+
+                                //verificando se o email e senha estão corretos
                                 if (SharedPreferencesUtil.email(context).equals(String.valueOf(editTextEmail.getText()))
                                         && SharedPreferencesUtil.password(context).equals(Hashing.sha1().
                                         hashString(String.valueOf(editTextPassword.getText()), Charsets.UTF_8).toString())) {
