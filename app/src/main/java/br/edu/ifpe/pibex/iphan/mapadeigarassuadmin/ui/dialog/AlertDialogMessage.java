@@ -9,6 +9,7 @@ import android.support.test.espresso.core.deps.guava.hash.Hashing;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -110,65 +111,58 @@ public class AlertDialogMessage {
 
         final AlertDialog.Builder builderConfirm = new AlertDialog.Builder(context);
         builderConfirm.setView(popUpViewConfirm);
+        builderConfirm.setTitle("Atenção!");
+        builderConfirm.setMessage("Por motivos de segurança, confirme sua senha.");
 
         final EditText editTextEmail = (EditText) popUpViewConfirm.findViewById(R.id.editTextEmail);
         final EditText editTextPassword = (EditText) popUpViewConfirm.findViewById(R.id.editTextPassoword);
+
+        editTextEmail.setText(SharedPreferencesUtil.email(context));
+        editTextEmail.setEnabled(false);
 
         builderConfirm.setCancelable(false)
                 .setPositiveButton("Confirmar",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
-
                                 AlertDialogMessage.progressDialogStart(context, "Aguarde", "Autenticando...");
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
+                                if (SharedPreferencesUtil.email(context).equals(String.valueOf(editTextEmail.getText()))
+                                        && SharedPreferencesUtil.password(context).equals(Hashing.sha1().
+                                        hashString(String.valueOf(editTextPassword.getText()), Charsets.UTF_8).toString())) {
 
-                                            Thread.sleep(2000);
-                                            if (SharedPreferencesUtil.email(context).equals(String.valueOf(editTextEmail.getText()))
-                                                    && SharedPreferencesUtil.password(context).equals(Hashing.sha1().
-                                                    hashString(String.valueOf(editTextPassword.getText()), Charsets.UTF_8).toString())) {
+                                    Map<String, Object> location = new HashMap<String, Object>();
+                                    location.put("name", name);
+                                    location.put("address", address);
+                                    location.put("description", description);
+                                    location.put("latitude", latitude);
+                                    location.put("longitude", longitude);
 
+                                    //update no pontos
+                                    ConnectionFireBaseModel.getReferenceFirebase()
+                                            .child("locations")
+                                            .child(String.valueOf(_id - 1)).updateChildren(location);
 
-                                                Map<String, Object> location = new HashMap<String, Object>();
-                                                location.put("name", name);
-                                                location.put("address", address);
-                                                location.put("description", description);
-                                                location.put("latitude", latitude);
-                                                location.put("longitude", longitude);
+                                    AlertDialogMessage.progressDialogDismiss();
+                                    InvokeAddMarkerMapOther invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(context);
+                                    invokeAddMarkerMapOther.onAddMarkerFirebase();
 
-                                                //update no pontos
-                                                ConnectionFireBaseModel.getReferenceFirebase()
-                                                        .child("locations")
-                                                        .child(String.valueOf(_id - 1)).updateChildren(location);
+                                    Toast.makeText(context, "Ponto Alterado!",
+                                            Toast.LENGTH_LONG).show();
 
-                                                InvokeAddMarkerMapOther invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(context);
-                                                invokeAddMarkerMapOther.onAddMarkerFirebase();
-                                                AlertDialogMessage.progressDialogDismiss();
+                                } else {
 
-                                            } else {
-                                                AlertDialogMessage.progressDialogDismiss();
-                                                AlertDialogMessage.alertDialogMessage(context, "Erro", "Email ou senha incorreto!");
-                                            }
+                                    AlertDialogMessage.progressDialogDismiss();
+                                    AlertDialogMessage.alertDialogMessage(context, "Erro", "senha incorreta!");
 
-
-                                        } catch (InterruptedException e) {
-                                        }
-                                    }
-                                }).start();
-
+                                }
                             }
 
-                        })
-
-                .setNegativeButton("Cancelar",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                        }).setNegativeButton("Cancelar",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
 
         AlertDialog alertDialog = builderConfirm.create();
         alertDialog.show();
