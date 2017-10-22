@@ -150,6 +150,8 @@ public class HomeActivity extends AppCompatActivity
                         ConnectionFireBaseModel.getFirebaseAuth().signOut();
                         AlertDialogMessage.progressDialogDismiss();
                         SharedPreferencesUtil.isLogged(context, false);
+                        SharedPreferencesUtil.remove().remove("email").commit();
+                        SharedPreferencesUtil.remove().remove("password").commit();
                         Intent intent = new Intent(HomeActivity.this, Login.class);
                         startActivity(intent);
 

@@ -78,4 +78,8 @@ public class SharedPreferencesUtil {
         return sharedPreferences(context).getString("password", "");
     }
 
+    public static SharedPreferences.Editor remove(){
+        return editor;
+    }
+
 }
