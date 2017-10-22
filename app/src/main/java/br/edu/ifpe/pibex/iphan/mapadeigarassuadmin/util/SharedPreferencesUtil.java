@@ -58,4 +58,24 @@ public class SharedPreferencesUtil {
         return sharedPreferences(context).getInt("typeMaps", 0);
     }
 
+    public static void email(Context context, String email){
+        editor = sharedPreferences(context).edit();
+        editor.putString("email", email);
+        editor.commit();
+    }
+
+    public static String email(Context context){
+        return sharedPreferences(context).getString("email", "");
+    }
+
+    public static void password(Context context, String password){
+        editor = sharedPreferences(context).edit();
+        editor.putString("password", password);
+        editor.commit();
+    }
+
+    public static String password(Context context){
+        return sharedPreferences(context).getString("password", "");
+    }
+
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.test.espresso.core.deps.guava.base.Charsets;
+import android.support.test.espresso.core.deps.guava.hash.Hashing;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,13 +81,16 @@ public class Login extends Activity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            AlertDialogMessage.progressDialogDismiss();
-                            SharedPreferencesUtil.isLogged(context, true);
-                            openHome();
+                            AlertDialogMessage.progressDialogDismiss(); //fechando progressDialog
+                            SharedPreferencesUtil.isLogged(context, true); //colocando true se o usuário for logado com sucesso
+                            SharedPreferencesUtil.email(context,
+                                    Hashing.sha1().hashString(userModel.getPassword(), Charsets.UTF_8 ).toString()); //armazenando password com sha1 localmente
+                            SharedPreferencesUtil.email(context, userModel.getEmail()); //armazenando email localmente
+                            openHome(); //chamando activity home
 
                         } else {
 
-                            AlertDialogMessage.progressDialogDismiss();
+                            AlertDialogMessage.progressDialogDismiss(); //fechando progressDialog
                             //Alert
                             AlertDialogMessage.alertDialogMessage(context, "Erro!", "Usuário ou senha incorreto!");
                         }
