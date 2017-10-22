@@ -8,7 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.ConnectionFireBaseModel;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.other.InvokeAddMarkerMapOther;
 
 public class AlertDialogMessage {
 
@@ -58,7 +63,8 @@ public class AlertDialogMessage {
         progressDialog.cancel();
     }
 
-    public static void alertDialogMarker(Context context, String name, String address, String description) {
+    public static void alertDialogMarker(final Context context, final int _id, final String name, final String address,
+                                         final String description, final double latitude, final double longitude) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View popUpView = layoutInflater.inflate(R.layout.alert_edit_marker, null);
@@ -78,6 +84,21 @@ public class AlertDialogMessage {
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+
+                                Map<String, Object> location = new HashMap<String, Object>();
+                                location.put("name", String.valueOf(editTextName.getText()));
+                                location.put("address", String.valueOf(editTextAddress.getText()));
+                                location.put("description", String.valueOf(editTextDescription.getText()));
+                                location.put("latitude", latitude);
+                                location.put("longitude", longitude);
+
+                                //update no pontos
+                                ConnectionFireBaseModel.getReferenceFirebase()
+                                        .child("locations")
+                                        .child(String.valueOf(_id-1)).updateChildren(location);
+
+                                InvokeAddMarkerMapOther invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(context);
+                                invokeAddMarkerMapOther.onAddMarkerFirebase();
 
                             }
                         })

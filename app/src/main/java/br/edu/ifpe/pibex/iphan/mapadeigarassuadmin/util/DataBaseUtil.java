@@ -38,13 +38,17 @@ public class DataBaseUtil extends ConnectionDataBaseUtil {
 
     public LocationModel searchLocation(String name) {
 
-        cursor = database.query(Constants.TABLE, new String[]{Constants.NAME, Constants.ADDRESS, Constants.DESCRIPTION}, Constants.NAME + " = \'" + name + "\' ", null, null, null, null);
+        cursor = database.query(Constants.TABLE, new String[]{Constants.ID, Constants.NAME, Constants.ADDRESS,
+                Constants.DESCRIPTION, Constants.LATITUDE, Constants.LONGITUDE}, Constants.NAME + " = \'" + name + "\' ", null, null, null, null);
         cursor.moveToNext();
 
         LocationModel locationModel = new LocationModel();
-        locationModel.setName(cursor.getString(0));
-        locationModel.setAddress(cursor.getString(1));
-        locationModel.setDescription(cursor.getString(2));
+        locationModel.setId(cursor.getInt(0));
+        locationModel.setName(cursor.getString(1));
+        locationModel.setAddress(cursor.getString(2));
+        locationModel.setDescription(cursor.getString(3));
+        locationModel.setLatitude(cursor.getDouble(4));
+        locationModel.setLongitude(cursor.getDouble(5));
 
         return locationModel;
     }

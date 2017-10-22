@@ -1,6 +1,8 @@
 package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model;
 
 public class LocationModel{
+
+    private int id;
     private String name;
     private double longitude;
     private double latitude;
@@ -16,6 +18,23 @@ public class LocationModel{
         this.latitude = latitude;
         this.address = address;
         this.description = description;
+    }
+
+    public LocationModel(int id, String name, String address, String description, double latitude, double longitude) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
