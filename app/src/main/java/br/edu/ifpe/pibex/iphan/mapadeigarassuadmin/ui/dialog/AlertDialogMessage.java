@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.test.espresso.core.deps.guava.base.Charsets;
+import android.support.test.espresso.core.deps.guava.hash.Hashing;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ import java.util.Map;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.R;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.ConnectionFireBaseModel;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.other.InvokeAddMarkerMapOther;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.SharedPreferencesUtil;
 
 public class AlertDialogMessage {
 
@@ -116,20 +119,45 @@ public class AlertDialogMessage {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
-                                Map<String, Object> location = new HashMap<String, Object>();
-                                location.put("name", name);
-                                location.put("address", address);
-                                location.put("description", description);
-                                location.put("latitude", latitude);
-                                location.put("longitude", longitude);
 
-                                //update no pontos
-                                ConnectionFireBaseModel.getReferenceFirebase()
-                                        .child("locations")
-                                        .child(String.valueOf(_id - 1)).updateChildren(location);
+                                AlertDialogMessage.progressDialogStart(context, "Aguarde", "Autenticando...");
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
 
-                                InvokeAddMarkerMapOther invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(context);
-                                invokeAddMarkerMapOther.onAddMarkerFirebase();
+                                            Thread.sleep(2000);
+                                            if (SharedPreferencesUtil.email(context).equals(String.valueOf(editTextEmail.getText()))
+                                                    && SharedPreferencesUtil.password(context).equals(Hashing.sha1().
+                                                    hashString(String.valueOf(editTextPassword.getText()), Charsets.UTF_8).toString())) {
+
+
+                                                Map<String, Object> location = new HashMap<String, Object>();
+                                                location.put("name", name);
+                                                location.put("address", address);
+                                                location.put("description", description);
+                                                location.put("latitude", latitude);
+                                                location.put("longitude", longitude);
+
+                                                //update no pontos
+                                                ConnectionFireBaseModel.getReferenceFirebase()
+                                                        .child("locations")
+                                                        .child(String.valueOf(_id - 1)).updateChildren(location);
+
+                                                InvokeAddMarkerMapOther invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(context);
+                                                invokeAddMarkerMapOther.onAddMarkerFirebase();
+                                                AlertDialogMessage.progressDialogDismiss();
+
+                                            } else {
+                                                AlertDialogMessage.progressDialogDismiss();
+                                                AlertDialogMessage.alertDialogMessage(context, "Erro", "Email ou senha incorreto!");
+                                            }
+
+
+                                        } catch (InterruptedException e) {
+                                        }
+                                    }
+                                }).start();
 
                             }
 
