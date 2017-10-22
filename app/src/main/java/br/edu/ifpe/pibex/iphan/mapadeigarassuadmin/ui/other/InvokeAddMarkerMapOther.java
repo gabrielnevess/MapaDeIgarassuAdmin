@@ -7,13 +7,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.ConnectionFireBaseModel;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.dialog.AlertDialogMessage;
+import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.DataBaseUtil;
 
 public class InvokeAddMarkerMapOther implements OnMapReadyCallback{
 
     private Context context;
+    private DataBaseUtil dataBaseUtil;
 
     public InvokeAddMarkerMapOther(Context context) {
         this.context = context;
+        dataBaseUtil = new DataBaseUtil(context);
     }
 
     public void onAddMarkerFirebase() {
@@ -23,7 +26,7 @@ public class InvokeAddMarkerMapOther implements OnMapReadyCallback{
         AlertDialogMessage.progressDialogStart(context, "Aguarde", "Os pontos estão sendo carregados..."); //Exibindo janela de progresso
         ConnectionFireBaseModel.getReferenceFirebase()
                 .child("locations")
-                .addValueEventListener(new ValueEventListenerMarkerOther(this.context));
+                .addValueEventListener(new ValueEventListenerMarkerOther(this.dataBaseUtil));
     }
 
     @Override

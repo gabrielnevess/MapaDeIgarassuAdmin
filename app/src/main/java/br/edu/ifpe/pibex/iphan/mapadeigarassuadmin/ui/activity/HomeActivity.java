@@ -103,7 +103,8 @@ public class HomeActivity extends AppCompatActivity
                 LocationModel locationModel = dataBaseUtil.searchLocation(name);
 
                 if (name.equals(locationModel.getName())) {
-
+                    AlertDialogMessage.alertDialogMarker(context,
+                            locationModel.getName(), locationModel.getAddress(), locationModel.getDescription());
                 }
             }
 
