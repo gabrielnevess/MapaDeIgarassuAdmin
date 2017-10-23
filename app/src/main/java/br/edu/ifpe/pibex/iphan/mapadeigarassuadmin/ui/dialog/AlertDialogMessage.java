@@ -35,7 +35,7 @@ public class AlertDialogMessage {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
+            public void onClick(DialogInterface dialog, int id) {
                 alertDialog.dismiss();
             }
         });
