@@ -9,7 +9,7 @@ import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants.Constants;
 public class ConnectionDataBaseUtil extends SQLiteOpenHelper{
 
     public ConnectionDataBaseUtil(Context context) {
-        super(context, Constants.BD_NOME, null, Constants.VERSAO_BD);
+        super(context, Constants.NAME_DB, null, Constants.VERSION_DB);
     }
 
     @Override
