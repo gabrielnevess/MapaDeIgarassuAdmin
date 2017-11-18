@@ -6,7 +6,7 @@ public class Constants {
 
     //constante Banco de Dados
     public static final String NAME_DB = "MapaDeIgarassu";
-    public static final int VERSION_DB = 5;
+    public static final int VERSION_DB = 1;
     public static final String TABLE = "location";
     public static final String ID = "_id";
     public static final String NAME = "name";
@@ -28,6 +28,9 @@ public class Constants {
     public static final String INSERT_ALL = "insert into "+TABLE+"("
             +NAME+","+LONGITUDE+","+LATITUDE+","+ADDRESS+","+DESCRIPTION+") values(?, ?, ?, ?, ?)";
     public static final String SELECT_FROM_NAME = "select * from "+TABLE+" where "+NAME+" = like %?%";
+    public static final String UPDATE_TABLE_LOCATION = "update " + TABLE + " set " + NAME + " = ?, "+ LONGITUDE + " = ?, " + LATITUDE + " = ?, " +
+            ADDRESS + " = ?, " + DESCRIPTION + " = ? " + "where " + ID + " = ? ";
+    public static final String DELETE_LOCATION = "delete from " + TABLE + " where " + ID + " = ?";
 
     //constantes para os tipos de mapa
     public static final int MAP_TYPE_NONE = 0;
