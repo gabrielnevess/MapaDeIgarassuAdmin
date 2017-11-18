@@ -1,6 +1,5 @@
 package br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,7 +7,6 @@ import android.database.sqlite.SQLiteStatement;
 
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants.Constants;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.LocationModel;
-import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.other.MarkerOther;
 
 public class DataBaseUtil extends ConnectionDataBaseUtil {
 
@@ -75,19 +73,4 @@ public class DataBaseUtil extends ConnectionDataBaseUtil {
 
     }
 
-    public void addMarkerSqlite() {
-        @SuppressLint("Recycle")
-        Cursor cursor = database.rawQuery(Constants.SELECT_ALL, null);
-
-        while (cursor.moveToNext()) {
-
-//          int id = cursor.getColumnIndex(Constants.ID);
-            int name = cursor.getColumnIndex(Constants.NAME);
-            int longitude = cursor.getColumnIndex(Constants.LONGITUDE);
-            int latitude = cursor.getColumnIndex(Constants.LATITUDE);
-
-            MarkerOther.marker(cursor.getString(name), cursor.getDouble(latitude), cursor.getDouble(longitude)); //add marker
-
-        }
-    }
 }
