@@ -21,10 +21,9 @@ public class ValueEventListenerMarkerOther implements ValueEventListener{
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
 
-        Iterable<DataSnapshot> dataSnapshots = dataSnapshot.getChildren();
         GoogleMapsModel.getMap().clear(); /*Limpando o mapa*/
-
         this.dataBaseUtil.dropTable(); //drop table
+        Iterable<DataSnapshot> dataSnapshots = dataSnapshot.getChildren();
 
         for (DataSnapshot dataSnapshot1 : dataSnapshots) { /*Inserindo pontos ao mapa*/
 
@@ -35,7 +34,6 @@ public class ValueEventListenerMarkerOther implements ValueEventListener{
         }
 
         AlertDialogMessage.progressDialogDismiss(); //Fechando progress Dialog
-        ConnectionFireBaseModel.getReferenceFirebase().onDisconnect(); //Fechando conexão do firebase.
 
     }
 

@@ -24,6 +24,7 @@ public class InvokeAddMarkerMapOther implements OnMapReadyCallback{
         AlertDialogMessage.progressDialogStart(context, "Aguarde", "Os pontos estão sendo carregados..."); //Exibindo janela de progresso
         ConnectionFireBaseModel.getReferenceFirebase()
                 .child("locations")
+                .orderByKey()
                 .addValueEventListener(new ValueEventListenerMarkerOther(this.dataBaseUtil));
     }
 

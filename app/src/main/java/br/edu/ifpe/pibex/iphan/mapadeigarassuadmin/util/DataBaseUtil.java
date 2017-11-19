@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.constants.Constants;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.LocationModel;
@@ -55,22 +56,35 @@ public class DataBaseUtil extends ConnectionDataBaseUtil {
         stmt.execute();
     }
 
-    public LocationModel searchLocation(String name) {
+    public LocationModel getLocation(String searchLocation) {
 
-        cursor = database.query(Constants.TABLE, new String[]{Constants.NAME, Constants.ADDRESS, Constants.DESCRIPTION}, Constants.NAME + " = \'" + name + "\' ", null, null, null, null);
+        cursor = database.rawQuery(Constants.SELECT_FROM_NAME, new String[]{ searchLocation });
         cursor.moveToNext();
 
+        int id = cursor.getColumnIndex(Constants.ID);
+        int name = cursor.getColumnIndex(Constants.NAME);
+        int longitude = cursor.getColumnIndex(Constants.LONGITUDE);
+        int latitude = cursor.getColumnIndex(Constants.LATITUDE);
+        int address = cursor.getColumnIndex(Constants.ADDRESS);
+        int description = cursor.getColumnIndex(Constants.DESCRIPTION);
+
+        Log.d("id"," "+cursor.getInt(id));
+        Log.d("name"," "+cursor.getString(name));
+        Log.d("longitude"," "+cursor.getDouble(longitude));
+        Log.d("latitude"," "+cursor.getDouble(latitude));
+        Log.d("address"," "+cursor.getString(address));
+        Log.d("latitude"," "+cursor.getString(description));
+
+
         LocationModel locationModel = new LocationModel();
-        locationModel.setName(cursor.getString(0));
-        locationModel.setAddress(cursor.getString(1));
-        locationModel.setDescription(cursor.getString(2));
+        locationModel.setId(cursor.getInt(id));
+        locationModel.setName(cursor.getString(name));
+        locationModel.setLongitude(Double.valueOf(cursor.getString(longitude)));
+        locationModel.setLatitude(Double.valueOf(cursor.getString(latitude)));
+        locationModel.setAddress(cursor.getString(address));
+        locationModel.setDescription(cursor.getString(description));
 
         return locationModel;
-    }
-
-    public void String(String name) {
-        cursor = database.rawQuery(Constants.SELECT_FROM_NAME, new String[]{name});
-
     }
 
 }

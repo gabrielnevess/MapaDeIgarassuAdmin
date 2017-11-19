@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.test.espresso.core.deps.guava.base.Charsets;
 import android.support.test.espresso.core.deps.guava.hash.Hashing;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -124,12 +125,11 @@ public class AlertDialogMessage {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
-                                AlertDialogMessage.progressDialogStart(context, "Aguarde", "Autenticando...");
-
                                 //verificando se o email e senha estão corretos
                                 if (SharedPreferencesUtil.email(context).equals(String.valueOf(editTextEmail.getText()))
                                         && SharedPreferencesUtil.password(context).equals(Hashing.sha1().
                                         hashString(String.valueOf(editTextPassword.getText()), Charsets.UTF_8).toString())) {
+
 
                                     Map<String, Object> location = new HashMap<String, Object>();
                                     location.put("name", name);
@@ -141,9 +141,8 @@ public class AlertDialogMessage {
                                     //update do ponto específico
                                     ConnectionFireBaseModel.getReferenceFirebase()
                                             .child("locations")
-                                            .child(String.valueOf( _id-1 )).updateChildren(location);
+                                            .child(String.valueOf( _id-2 )).updateChildren( location );
 
-                                    AlertDialogMessage.progressDialogDismiss();
                                     InvokeAddMarkerMapOther invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(context);
                                     invokeAddMarkerMapOther.onAddMarkerFirebase();
 
@@ -152,7 +151,6 @@ public class AlertDialogMessage {
 
                                 } else {
 
-                                    AlertDialogMessage.progressDialogDismiss();
                                     AlertDialogMessage.alertDialogMessage(context, "Erro", "senha incorreta!");
 
                                 }

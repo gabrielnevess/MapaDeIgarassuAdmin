@@ -22,7 +22,7 @@ import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.model.UserModel;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.ui.dialog.AlertDialogMessage;
 import br.edu.ifpe.pibex.iphan.mapadeigarassuadmin.util.SharedPreferencesUtil;
 
-public class Login extends Activity {
+public class LoginActivity extends Activity {
 
     private EditText email;
     private EditText password;
@@ -31,7 +31,7 @@ public class Login extends Activity {
     private UserModel userModel;
     private Context context;
 
-    public Login(){
+    public LoginActivity(){
         this.context = this;
     }
 
@@ -99,7 +99,7 @@ public class Login extends Activity {
     }
 
     private void openHome() {
-        Intent intent = new Intent(Login.this, HomeActivity.class);
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 

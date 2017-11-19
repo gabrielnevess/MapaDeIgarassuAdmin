@@ -100,7 +100,7 @@ public class HomeActivity extends AppCompatActivity
                 DataBaseUtil dataBaseUtil = new DataBaseUtil(context); /*Instância da base de dados local*/
 
                 String name = marker.getTitle();
-                LocationModel locationModel = dataBaseUtil.searchLocation(name);
+                LocationModel locationModel = dataBaseUtil.getLocation(name);
 
                 if (name.equals(locationModel.getName())) {
                     AlertDialogMessage alertDialogMessage = new AlertDialogMessage();
@@ -153,7 +153,7 @@ public class HomeActivity extends AppCompatActivity
                         SharedPreferencesUtil.isLogged(context, false);
                         SharedPreferencesUtil.remove().remove("email").commit();
                         SharedPreferencesUtil.remove().remove("password").commit();
-                        Intent intent = new Intent(HomeActivity.this, Login.class);
+                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                         startActivity(intent);
 
                     } catch (InterruptedException e) {
