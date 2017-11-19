@@ -141,7 +141,7 @@ public class AlertDialogMessage {
                                     //update do ponto específico
                                     ConnectionFireBaseModel.getReferenceFirebase()
                                             .child("locations")
-                                            .child(String.valueOf( _id-2 )).updateChildren( location );
+                                            .child(String.valueOf( _id-1 )).updateChildren( location );
 
                                     InvokeAddMarkerMapOther invokeAddMarkerMapOther = new InvokeAddMarkerMapOther(context);
                                     invokeAddMarkerMapOther.onAddMarkerFirebase();
